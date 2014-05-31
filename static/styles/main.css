@@ -1,0 +1,94 @@
+/****************************************\
+| CSS Stylesheet for Room Booking System |
+| by Nathan Hardy                        |
+\****************************************/
+
+html, body{
+	height: 100%;
+}
+
+body{
+	background-color: #EEEEEE;
+	color: #333333;
+	font-family: "Ubuntu Light", "Arial Narrow", Arial, sans-serif;
+}
+
+#wrapper{
+	min-height: 100%;
+}
+
+header, footer{
+	width: 100%;
+}
+
+#header, #footer{
+	width: 900px;
+	margin: auto;
+}
+
+header{
+	background-color: #003B6F;
+	color: #EEEEEE;
+	height: 50px;
+}
+
+h1{
+	font-family: "Courier New", Courier, monospace, serif;
+	font-size: 24pt;
+}
+
+nav{
+	background-color: #EEEEEE;
+	border: 0;
+	border-top: 5px solid #333333;
+}
+nav a:link, nav a:visited{
+	border-radius: 0 0 8px 8px;
+	padding: 0px 15px 5px;
+}
+
+nav ul{
+	width: 900px;
+	margin: auto;
+	padding: 0;
+}
+
+nav a{
+	float: right;
+	font-weight: bold;
+	text-decoration: none;
+	color: #EEEEEE;
+	margin: 0 5px 0 0;
+	background-color: #003B6F;
+}
+
+nav a:hover{
+	padding-top: 12px;
+}
+
+article{
+	padding: 15px;
+	overflow: auto;
+	padding-bottom: 115px;
+}
+
+footer{
+	border-top: 5px solid #333333;
+	position: relative;
+	margin-top: -100px;
+	height: 100px;
+	clear: both;
+}
+
+form{
+	width: 900px;
+	margin: auto;
+	padding: 15px;
+}
+
+form table{
+	border: 5px solid #FFFFFF;
+}
+form table tr td{
+	padding: 5px 10px;
+}
