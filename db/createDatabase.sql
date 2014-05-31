@@ -1,0 +1,53 @@
+DROP TABLE IF EXISTS faculties;
+DROP TABLE IF EXISTS rooms;
+DROP TABLE IF EXISTS resourcetypes;
+DROP TABLE IF EXISTS resources;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS bookings;
+
+CREATE TABLE faculties (
+	fid INTEGER PRIMARY KEY,
+	name TEXT NOT NULL
+);
+
+CREATE TABLE rooms (
+	fid INTEGER NOT NULL,
+	rid INTEGER NOT NULL,
+	code TEXT NOT NULL,
+	capacity INTEGER NOT NULL,
+	PRIMARY KEY (fid, rid),
+	FOREIGN KEY (fid) REFERENCES faculties(fid)
+);
+
+CREATE TABLE resourcetypes (
+	type INTEGER PRIMARY KEY,
+	name TEXT NOT NULL
+);
+
+CREATE TABLE resources (
+	fid INTEGER NOT NULL,
+	rid INTEGER NOT NULL,
+	type INTEGER NOT NULL,
+	quantity INTEGER NOT NULL,
+	PRIMARY KEY (fid, rid, type),
+	FOREIGN KEY (fid) REFERENCES rooms(fid),
+	FOREIGN KEY (rid) REFERENCES rooms(rid),
+	FOREIGN KEY (type) REFERENCES resourcetypes(type)
+);
+
+CREATE TABLE users (
+	uid INTEGER PRIMARY KEY,
+	username TEXT NOT NULL,
+	utype INTEGER NOT NULL
+);
+
+CREATE TABLE bookings (
+	fid INTEGER NOT NULL,
+	rid INTEGER NOT NULL,
+	uid INTEGER NOT NULL,
+	stime INTEGER NOT NULL,
+	etime INTEGER NOT NULL,
+	FOREIGN KEY (fid) REFERENCES rooms(fid),
+	FOREIGN KEY (rid) REFERENCES rooms(rid),
+	FOREIGN KEY (uid) REFERENCES users(uid)
+);
