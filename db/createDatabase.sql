@@ -6,21 +6,20 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS bookings;
 
 CREATE TABLE faculties (
-	fid INTEGER PRIMARY KEY,
+	fid INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL
 );
 
 CREATE TABLE rooms (
 	fid INTEGER NOT NULL,
-	rid INTEGER NOT NULL,
+	rid INTEGER PRIMARY KEY AUTOINCREMENT,
 	code TEXT NOT NULL,
 	capacity INTEGER NOT NULL,
-	PRIMARY KEY (fid, rid),
 	FOREIGN KEY (fid) REFERENCES faculties(fid)
 );
 
 CREATE TABLE resourcetypes (
-	type INTEGER PRIMARY KEY,
+	type INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL
 );
 
@@ -51,3 +50,6 @@ CREATE TABLE bookings (
 	FOREIGN KEY (rid) REFERENCES rooms(rid),
 	FOREIGN KEY (uid) REFERENCES users(uid)
 );
+
+INSERT INTO faculties (name) VALUES ('Dummy Faculty');
+INSERT INTO resourcetypes (name) VALUES ('Computer');
