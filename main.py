@@ -9,9 +9,13 @@ class MainHandler(tornado.web.RequestHandler):
   def get(self):
     self.write(template_loader.load('content.html').generate(page=Page('Home',content='<p>Content</p>''')))
 
+class LoginHandler(tornado.web.RequestHandler):
+  def get(self):
+    self.write(template_loader.load('login.html').generate(page=Page('Login'), errors=[]))
 
 handlers = [
   (r'/', MainHandler),
+  (r'/login', LoginHandler),
   (r'/styles/(.*)',tornado.web.StaticFileHandler, {'path': './static/styles/'}),
   (r'/images/(.*)',tornado.web.StaticFileHandler, {'path': './static/images/'}),
   (r'/fonts/(.*)',tornado.web.StaticFileHandler, {'path': './static/fonts/'})
