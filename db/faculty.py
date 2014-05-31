@@ -8,10 +8,11 @@ class Faculty:
     self._cursor = connection.cursor()
 
     if self.fid is None:
-      self.cursor.execute('''
+      self._cursor.execute('''
         INSERT INTO faculties (name)
         VALUES (?)
-      ''', (self.name))
+      ''', (self.name,))
+      self.fid = self._cursor.lastrowid
       connection.commit()
 
   @classmethod
@@ -19,10 +20,10 @@ class Faculty:
     cursor = connection.cursor()
     cursor.execute('''
       SELECT name FROM faculties WHERE fid = ?
-    ''', (fid))
+    ''', (fid,))
     row = cursor.fetchone()
 
-    if is None:
+    if row is None:
       return None
 
     return cls(row[0], fid)
