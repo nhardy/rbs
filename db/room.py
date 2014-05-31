@@ -1,8 +1,8 @@
 from . import connection
 
 class Room:
-  def __init__(self, faculty=1, code='', capacity=20, resources={}, rid=None):
-    self.faculty = faculty
+  def __init__(self, fid=1, code='', capacity=20, resources={}, rid=None):
+    self.fid = fid
     self.code = code
     self.capacity = capacity
     self.resources = resources
