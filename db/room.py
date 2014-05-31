@@ -1,7 +1,7 @@
 from . import connection
 
 class Room:
-  def __init__(self, faculty=0, code='', capacity=20, resources={}, rid=None):
+  def __init__(self, faculty=1, code='', capacity=20, resources={}, rid=None):
     self.faculty = faculty
     self.code = code
     self.capacity = capacity
@@ -22,3 +22,26 @@ class Room:
           VALUES (?, ?, ?, ?)
         ''', (self.faculty, self.rid, resource_type, quantity))
       connection.commit()
+
+  @classmethod
+  def from_id(cls, fid, rid):
+    cursor = connection.cursor()
+    cursor.execute('''
+      SELECT code, capacity FROM rooms WHERE fid = ? AND rid = ?
+    ''', (fid, rid))
+    row = cursor.fetchone()
+
+    if row is None:
+      return None
+
+    code = row[0]
+    capacity = row[1]
+
+    cursor.execute('''
+      SELECT type, quantity FROM resources WHERE fid = ? AND rid = ?
+    ''', (fid, rid))
+    resources = {}
+    for r in cursor:
+      resources[r[0]] = r[1]
+
+    return cls(fid, code, capacity, resources, rid)
