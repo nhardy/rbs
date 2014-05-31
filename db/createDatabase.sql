@@ -50,6 +50,7 @@ CREATE TABLE bookings (
 	uid INTEGER NOT NULL,
 	stime INTEGER NOT NULL,
 	etime INTEGER NOT NULL,
+--	TODO: Booking resource requirements for shuffling bookings
 	FOREIGN KEY (fid) REFERENCES rooms(fid),
 	FOREIGN KEY (rid) REFERENCES rooms(rid),
 	FOREIGN KEY (uid) REFERENCES users(uid)
