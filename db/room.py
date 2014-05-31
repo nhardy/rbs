@@ -14,13 +14,13 @@ class Room:
       self._cursor.execute('''
         INSERT INTO rooms (fid, code, capacity)
         VALUES (?, ?, ?)
-      ''', (self.faculty, self.code, self.capacity))
+      ''', (self.fid, self.code, self.capacity))
       self.rid = self._cursor.lastrowid
       for resource_type, quantity in self.resources:
         self._cursor.execute('''
           INSERT INTO resources (fid, rid, type, quantity)
           VALUES (?, ?, ?, ?)
-        ''', (self.faculty, self.rid, resource_type, quantity))
+        ''', (self.fid, self.rid, resource_type, quantity))
       connection.commit()
 
   @classmethod
