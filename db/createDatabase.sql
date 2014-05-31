@@ -40,7 +40,7 @@ CREATE TABLE users (
 	username TEXT NOT NULL,
 	utype INTEGER NOT NULL,
 	password TEXT NOT NULL,
-	hash TEXT NOT NULL
+	salt TEXT NOT NULL
 );
 
 CREATE TABLE bookings (
