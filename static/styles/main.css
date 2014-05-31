@@ -55,7 +55,6 @@ nav ul{
 
 nav a{
 	float: right;
-	font-weight: bold;
 	text-decoration: none;
 	color: #EEEEEE;
 	margin: 0 5px 0 0;
@@ -63,7 +62,7 @@ nav a{
 }
 
 nav a:hover{
-	padding-top: 12px;
+	/* padding-top: 12px; */
 }
 
 article{
