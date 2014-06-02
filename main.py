@@ -3,16 +3,13 @@ import tornado.web
 import tornado.template
 from rbs.objects.page import Page
 from rbs.db.user import User
+from rbs.handlers.home import HomeHandler
 from rbs.handlers.login import LoginHandler
 from rbs.handlers.includes import template_loader, current_user
 import random, string
 
-class MainHandler(tornado.web.RequestHandler):
-  def get(self):
-    self.write(template_loader.load('content.html').generate(page=Page('Home',content='<p>Username:{}</p>'.format(current_user(self)))))
-
 handlers = [
-  (r'/', MainHandler),
+  (r'/', HomeHandler),
   (r'/login', LoginHandler),
   (r'/styles/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/styles/'}),
   (r'/images/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/images/'}),

@@ -37,6 +37,11 @@ h1{
 	font-size: 24pt;
 }
 
+#welcome{
+	float: right;
+	margin-top: -15px;
+}
+
 nav{
 	background-color: #EEEEEE;
 	border: 0;
@@ -49,12 +54,13 @@ nav a:link, nav a:visited{
 
 nav ul{
 	width: 900px;
+	float: right;
 	margin: auto;
 	padding: 0;
 }
 
 nav a{
-	float: right;
+	float: left;
 	text-decoration: none;
 	color: #EEEEEE;
 	margin: 0 5px 0 0;
