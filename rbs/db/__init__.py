@@ -1,6 +1,6 @@
 import os, sqlite3
 
-main_dir = '../' if __name__ == '__main__' else './'
+main_dir = '../../' if __name__ == '__main__' else './'
 
 create_database = not os.path.exists('{}database.db'.format(main_dir))
 
