@@ -1,4 +1,5 @@
 from . import connection
+from datetime import datetime
 
 class Booking:
   def __init__(self, fid, rid, user, stime, etime, bid=None):

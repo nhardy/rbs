@@ -1,0 +1,34 @@
+{% autoescape None %}
+{% include header.html %}
+<article>
+<form id="book" method="POST" action="/book">
+{% if errors %}
+<div id="errors">
+<p>The following error(s) occurred whilst attempting book:</p>
+<ul>
+{% for e in errors %}
+<li>{{ e }}</li>
+{% end for %}
+</ul>
+</div>
+{% end if %}
+<table>
+<tr><td><label for="faculty">Faculty</label>:</td><td>
+<select name="faculty">
+{% for f in faculties %}
+<option value="{{ f.fid }}">{{ f.name }}</option>
+{% end for %}
+</select>
+</td></tr>
+<tr><td><label for="capacity">Capacity</label>:</td><td><input name="capacity" type="number" value="20" min="1" max="60" /></td></tr>
+<tr><td><label for="start_time">Start Time</label>:</td><td><input name="start_time" type="time" step="300" value="09:00:00" /></tr>
+<tr><td><label for="end_time">End Time</label>:</td><td><input name="end_time" type="time" step="300" value="10:00:00" /></tr>
+<!-- Recurring booking option -->
+<tr><td><label for="date">Date</label>:</td><td><input name="date" type="date" value="1970-01-01" /></tr>
+<!-- Insert resource checkign here -->
+<!-- <tr><td><label for=""></label>:</td><td><input /></tr> -->
+<tr><td></td><td><input type="submit" value="Book" /></td></tr>
+</table>
+</form>
+</article>
+{% include footer.html %}
