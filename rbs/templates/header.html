@@ -21,9 +21,12 @@
 <nav>
 <ul>
 <li><a href="/">Home</a></li>
+{% if user is None %}
 <li><a href="/login">Login</a></li>
 <li><a href="/register">Register</a></li>
+{% else %}
 <li><a href="/book">Make a booking</a></li>
+{% end if %}
 </ul>
 </nav>
 </header>
