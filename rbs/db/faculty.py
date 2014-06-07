@@ -1,4 +1,5 @@
 from . import connection
+from .room import Room
 
 class Faculty:
   def __init__(self, name='', fid=None):
@@ -14,6 +15,12 @@ class Faculty:
       ''', (self.name,))
       self.fid = self._cursor.lastrowid
       connection.commit()
+
+  def get_rooms(self):
+    self._cursor.execute('''
+      SELECT rid FROM rooms WHERE fid = ?
+    ''', (self.fid,))
+    return [Room.from_id(self.fid, r[0]) for r in self._cursor]
 
   @classmethod
   def from_id(cls, fid):
