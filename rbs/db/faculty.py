@@ -27,3 +27,14 @@ class Faculty:
       return None
 
     return cls(row[0], fid)
+
+  @classmethod
+  def list(cls):
+    faculties = []
+    cursor = connection.cursor()
+    cursor.execute('''
+      SELECT fid FROM faculties
+    ''')
+    for f in cursor:
+      faculties.append(cls.from_id(f[0]))
+    return faculties
