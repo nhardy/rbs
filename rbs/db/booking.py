@@ -29,3 +29,9 @@ class Booking:
       return None
 
     return cls(row[0], row[1], row[2], row[3], row[4], bid)
+
+  @classmethod
+  def attempt_booking(cls, fid, user, stime, etime, requirements={}):
+    cursor = connection.cursor()
+    for r in Faculty.from_id(fid).get_rooms():
+      pass
