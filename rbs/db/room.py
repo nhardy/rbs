@@ -23,6 +23,19 @@ class Room:
         ''', (self.fid, self.rid, resource_type, quantity))
       connection.commit()
 
+  def is_booked(self, stime, etime):
+    self._cursor.execute('''
+      SELECT COUNT(*) FROM bookings
+      WHERE
+        fid = ? AND
+        rid = ? AND
+        (
+          stime < ? < etime OR
+          stime < ? < etime
+        )
+    ''', (self.fid, self.rid, stime, etime))
+    pass
+
   @classmethod
   def from_id(cls, fid, rid):
     cursor = connection.cursor()
