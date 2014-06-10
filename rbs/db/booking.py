@@ -39,10 +39,8 @@ class Booking:
 
   @classmethod
   def attempt_booking(cls, faculty, user, stime, etime, requirements={}):
-    cursor = connection.cursor()
     for r in faculty.get_rooms():
       if r.is_booked(stime, etime): ## OR not has_requirements()
         continue
       return cls(faculty, r, user, stime, etime, requirements)
-    else:
-      return False
+    return False
