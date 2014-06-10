@@ -55,6 +55,3 @@ CREATE TABLE bookings (
 	FOREIGN KEY (rid) REFERENCES rooms(rid),
 	FOREIGN KEY (uid) REFERENCES users(uid)
 );
-
-INSERT INTO faculties (name) VALUES ('Dummy Faculty');
-INSERT INTO resourcetypes (name) VALUES ('Computer');
