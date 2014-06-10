@@ -3,18 +3,22 @@ from datetime import datetime
 from . import timestamp
 
 class Booking:
-  def __init__(self, fid, rid, user, stime, etime, bid=None):
-    self.fid = fid
-    self.rid = rid
+  def __init__(self, faculty, room, user, stime, etime, requirements={}, bid=None):
+    self.faculty = faculty
+    self.room = room
     self.user = user
     self.stime = stime
     self.etime = etime
+    self.requirements = requirements
+    self.bid = bid
+
+    self._cursor = connection.cursor()
 
     if self.bid is None:
       self._cursor.execute('''
         INSERT INTO bookings (fid, rid, uid, stime, etime)
         VALUES (?, ?, ?, ?, ?)
-      ''', (self.fid, self.rid, self.uid, timestamp(self.stime), timestamp(self.etime))
+      ''', (self.faculty.fid, self.room.rid, self.user.uid, timestamp(self.stime), timestamp(self.etime)))
       self.bid = self._cursor.lastrowid
       connection.commit()
 
@@ -29,10 +33,16 @@ class Booking:
     if row is None:
       return None
 
-    return cls(row[0], row[1], row[2], datetime.fromtimestamp(row[3]), datetime.fromtimestamp(row[4]), bid)
+    requirements = {} ## TODO
+
+    return cls(Faculty.from_id(row[0]), Room.from_id(row[0], row[1]), User.from_id(row[2]), datetime.fromtimestamp(row[3]), datetime.fromtimestamp(row[4]), requirements, bid)
 
   @classmethod
-  def attempt_booking(cls, fid, user, stime, etime, requirements={}):
+  def attempt_booking(cls, faculty, user, stime, etime, requirements={}):
     cursor = connection.cursor()
-    for r in Faculty.from_id(fid).get_rooms():
-      pass
+    for r in faculty.get_rooms():
+      if r.is_booked(stime, etime): ## OR not has_requirements()
+        continue
+      return cls(faculty, r, user, stime, etime, requirements)
+    else:
+      return False
