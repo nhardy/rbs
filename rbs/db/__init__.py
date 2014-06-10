@@ -1,4 +1,5 @@
 import os, sqlite3
+from time import mktime
 
 main_dir = '../../' if __name__ == '__main__' else './'
 
@@ -13,3 +14,6 @@ if create_database:
   for s in statements:
     cursor.execute(s)
   connection.commit()
+
+def timestamp(datetime):
+  return int(mktime(date.timetuple()))
