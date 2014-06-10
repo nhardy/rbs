@@ -24,7 +24,7 @@
 <tr><td><label for="start_time">Start Time</label>:</td><td><input name="start_time" type="time" step="300" value="09:00:00" /></tr>
 <tr><td><label for="end_time">End Time</label>:</td><td><input name="end_time" type="time" step="300" value="10:00:00" /></tr>
 <!-- Recurring booking option -->
-<tr><td><label for="date">Date</label>:</td><td><input name="date" type="date" value="1970-01-01" /></tr>
+<tr><td><label for="date">Date</label>:</td><td><input name="date" type="date" value="{{ datetime.datetime.today().strftime('%Y-%m-%d') }}" /></tr>
 <!-- Insert resource checkign here -->
 <!-- <tr><td><label for=""></label>:</td><td><input /></tr> -->
 <tr><td></td><td><input type="submit" value="Book" /></td></tr>
