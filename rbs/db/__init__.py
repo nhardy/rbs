@@ -16,4 +16,4 @@ if create_database:
   connection.commit()
 
 def timestamp(datetime):
-  return int(mktime(date.timetuple()))
+  return int(mktime(datetime.timetuple()))
