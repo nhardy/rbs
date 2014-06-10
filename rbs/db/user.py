@@ -56,3 +56,16 @@ class User:
       return None
 
     return cls(row[0], row[1], row[2])
+
+  @classmethod
+  def from_id(cls, uid):
+    cursor = connection.cursor()
+    cursor.execute('''
+      SELECT username, utype, uid FROM users WHERE uid = ?
+    ''', (uid,))
+    row = cursor.fetchone()
+
+    if row is None:
+      return None
+
+    return cls(row[0], row[1], row[2])
