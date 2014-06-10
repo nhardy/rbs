@@ -31,10 +31,12 @@ class Room:
         fid = ? AND
         rid = ? AND
         (
-          stime < ? < etime OR
-          stime < ? < etime
+          (? >= stime AND ? < etime)
+          OR
+          (? > stime AND ? <= etime)
         )
-    ''', (self.fid, self.rid, timestamp(stime), timestamp(etime)))
+    ''', (self.fid, self.rid, timestamp(stime), timestamp(stime), timestamp(etime), timestamp(etime)))
+
     if self._cursor.fetchone()[0] > 0:
       return True
 
