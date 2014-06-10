@@ -35,7 +35,7 @@ class Room:
           stime < ? < etime
         )
     ''', (self.fid, self.rid, timestamp(stime), timestamp(etime)))
-    if self._cursor.fetchone() > 0:
+    if self._cursor.fetchone()[0] > 0:
       return True
 
   @classmethod
