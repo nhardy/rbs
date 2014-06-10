@@ -1,4 +1,5 @@
 from . import connection
+from . import timestamp
 
 class Room:
   def __init__(self, fid=1, code='', capacity=20, resources={}, rid=None):
@@ -33,8 +34,9 @@ class Room:
           stime < ? < etime OR
           stime < ? < etime
         )
-    ''', (self.fid, self.rid, stime, etime))
-    pass
+    ''', (self.fid, self.rid, timestamp(stime), timestamp(etime)))
+    if self._cursor.fetchone() > 0:
+      return True
 
   @classmethod
   def from_id(cls, fid, rid):
