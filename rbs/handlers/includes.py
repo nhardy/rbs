@@ -1,5 +1,6 @@
 import tornado.template
 from ..db.user import User
+from datetime import timedelta
 
 template_loader = tornado.template.Loader('./rbs/templates')
 
@@ -8,6 +9,9 @@ def current_user(handler):
   if username is None:
     return None
   return User.from_username(username.decode())
+
+def round_time(time_delta, increment=300):
+  return timedelta(0, int(round(time_delta.total_seconds()/increment)*increment))
 
 def _day(n):
   n = int(n)

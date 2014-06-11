@@ -1,5 +1,5 @@
 import tornado.web
-from .includes import template_loader, current_user
+from .includes import template_loader, current_user, round_time
 from ..objects.page import Page
 from ..db.user import User
 from ..db.faculty import Faculty
@@ -40,13 +40,13 @@ class BookingHandler(tornado.web.RequestHandler):
         errors.append('Invalid Date. Your browser should be using \'YYYY-MM-DD\' format.')
       try:
         s = list(map(int,self.get_argument('start_time').split(':')))
-        start = date + timedelta(0, 0, 0, 0, s[1], s[0])
+        start = date + round_time(timedelta(0, 0, 0, 0, s[1], s[0]))
       except ValueError:
         start = date
         errors.append('Invalid Start Time.')
       try:
         e = list(map(int,self.get_argument('end_time').split(':')))
-        end = date + timedelta(0, 0, 0, 0, e[1], e[0])
+        end = date + round_time(timedelta(0, 0, 0, 0, e[1], e[0]))
       except ValueError:
         start = date
         errors.append('Invalid End Time.')
