@@ -97,8 +97,19 @@ form table{
 form table tr td{
 	padding: 5px 10px;
 }
+form table tr td input, form table tr td select{
+	width: 150px;
+}
 
 #errors{
 	background-color: #FFAAAA;
 	padding: 10px;
+	margin-bottom: 10px;
+}
+#errors ul{
+	margin-left: 30px;
+	padding: 5px;
+}
+#errors ul li{
+	list-style-type: square;
 }
