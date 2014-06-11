@@ -11,4 +11,5 @@ class BookingsHandler(tornado.web.RequestHandler):
     user = current_user(self)
     if not user:
       self.redirect('/')
-    self.page(user)
+    else:
+      self.page(user)
