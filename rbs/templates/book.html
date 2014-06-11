@@ -14,7 +14,7 @@
 {% end if %}
 <table>
 <tr><td><label for="faculty">Faculty</label>:</td><td>
-<select name="faculty">
+<select name="faculty" autofocus="on">
 {% for f in faculties %}
 <option value="{{ f.fid }}">{{ f.name }}</option>
 {% end for %}
