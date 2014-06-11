@@ -91,11 +91,15 @@ form{
 	padding: 15px;
 }
 
-form table{
+table{
 	border: 5px solid #FFFFFF;
+	border-collapse: collapse;
 }
-form table tr td{
+table tr td, table tr th{
 	padding: 5px 10px;
+}
+table#bookings th, table#bookings td{
+	border: 1px solid #FFFFFF;
 }
 form table tr td input, form table tr td select{
 	width: 150px;
