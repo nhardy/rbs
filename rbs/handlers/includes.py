@@ -8,3 +8,11 @@ def current_user(handler):
   if username is None:
     return None
   return User.from_username(username.decode())
+
+def _day(n):
+  n = int(n)
+  r = n % 10
+  return str(n) + 'th' if n in (11,12,13) else ('st' if r == 1 else ('nd' if r == 2 else ('rd' if r == 3 else 'th')))
+
+def format_datetime(datetime):
+  return '{}, {} of {}'.format(datetime.strftime('%A'), _day(datetime.strftime('%d')), datetime.strftime('%B, %Y - %I:%M%p'))

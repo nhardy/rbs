@@ -1,5 +1,5 @@
 import tornado.web
-from .includes import template_loader, current_user
+from .includes import template_loader, current_user, format_datetime
 from ..objects.page import Page
 from ..db.faculty import Faculty
 from ..db.room import Room
@@ -9,7 +9,7 @@ from datetime import datetime, date
 
 class BookingsHandler(tornado.web.RequestHandler):
   def page(self, user, bookings=[]):
-    self.write(template_loader.load('bookings.html').generate(user=user, bookings=bookings, page=Page('Bookings')))
+    self.write(template_loader.load('bookings.html').generate(user=user, bookings=bookings, page=Page('Bookings'), format_datetime=format_datetime))
   def get(self):
     user = current_user(self)
     if not user:
