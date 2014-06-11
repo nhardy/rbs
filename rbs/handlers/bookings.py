@@ -4,7 +4,7 @@ from ..objects.page import Page
 from ..db.user import User
 from ..db.booking import Booking
 
-class BookingHandler(tornado.web.RequestHandler):
+class BookingsHandler(tornado.web.RequestHandler):
   def page(self, user):
     self.write(template_loader.load('bookings.html').generate(user=user, bookings=[], page=Page('Bookings')))
   def get(self):
