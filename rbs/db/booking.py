@@ -53,7 +53,7 @@ class Booking:
     cursor = connection.cursor()
     room = None if faculty is None else room
     arguments = tuple([a for a in [None if faculty is None else faculty.fid, None if room is None else room.rid, None if user is None else user.uid, timestamp(date), limit, (page-1)*limit] if a is not None])
-    query = ('''
+    cursor.execute('''
       SELECT bid FROM bookings
       WHERE
     ''' + ((
@@ -72,8 +72,5 @@ class Booking:
         stime >= ?
       ORDER BY stime ASC
       LIMIT ? OFFSET ?
-    ''')
-    print('query:',query)
-    print('args:',arguments)
-    cursor.execute(query, arguments)
+    ''', arguments)
     return [cls.from_id(int(b[0])) for b in cursor.fetchall()]
