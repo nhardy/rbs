@@ -1,0 +1,11 @@
+{% autoescape None %}
+{% include header.html %}
+<article>
+<table id="rooms">
+<tr><th>Room Code</th></tr>
+{% for r in rooms %}
+<tr><td>{{ r.code }}</td></tr>
+{% end for %}
+</table>
+</article>
+{% include footer.html %}

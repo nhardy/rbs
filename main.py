@@ -8,6 +8,7 @@ from rbs.handlers.login import LoginHandler
 from rbs.handlers.register import RegisterHandler
 from rbs.handlers.book import BookingHandler
 from rbs.handlers.bookings import BookingsHandler
+from rbs.handlers.faculty import FacultyHandler
 from rbs.handlers.includes import template_loader, current_user
 import random, string
 
@@ -17,6 +18,7 @@ handlers = [
   (r'/register', RegisterHandler),
   (r'/book', BookingHandler),
   (r'/bookings', BookingsHandler),
+  (r'/faculty', FacultyHandler),
   (r'/styles/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/styles/'}),
   (r'/images/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/images/'}),
   (r'/fonts/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/fonts/'})
