@@ -97,9 +97,10 @@ table{
 }
 table tr td, table tr th{
 	padding: 5px 10px;
-}
-table#bookings th, table#bookings td{
 	border: 1px solid #FFFFFF;
+}
+form table th, form table td{
+	border: none;
 }
 form table tr td input, form table tr td select{
 	width: 150px;
