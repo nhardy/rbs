@@ -7,7 +7,8 @@ DROP TABLE IF EXISTS bookings;
 
 CREATE TABLE faculties (
 	fid INTEGER PRIMARY KEY,
-	name TEXT NOT NULL
+	name TEXT NOT NULL,
+	UNIQUE (name)
 );
 
 CREATE TABLE rooms (
