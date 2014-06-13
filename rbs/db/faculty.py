@@ -22,6 +22,12 @@ class Faculty:
     ''', (self.fid,))
     return [Room.from_id(self.fid, r[0]) for r in self._cursor]
 
+  @property
+  def total_rooms(self):
+    return self._cursor.execute('''
+      SELECT COUNT(*) FROM rooms WHERE fid = ?
+    ''', (self.fid,)).fetchone()[0]
+
   @classmethod
   def from_id(cls, fid):
     cursor = connection.cursor()
