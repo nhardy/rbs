@@ -4,18 +4,15 @@ from ..objects.page import Page
 from ..db.faculty import Faculty
 
 class FacultyHandler(tornado.web.RequestHandler):
-  def page(self, user, rooms=[]):
-    self.write(template_loader.load('faculty.html').generate(user=user, rooms=rooms, page=Page('Faculties')))
-  def get(self):
+  def page(self, user, faculty):
+    self.write(template_loader.load('faculty.html').generate(user=user, rooms=faculty.get_rooms(), page=Page('Rooms for {} Faculty'.format(faculty.name))))
+  def get(self, fid):
     user = current_user(self)
     if not user:
       self.redirect('/')
     else:
-      try:
-        faculty = Faculty.from_id(int(self.get_argument('fid','')))
-      except ValueError:
-        faculty = None
+      faculty = Faculty.from_id(int(fid))
       if faculty is None:
         raise tornado.web.HTTPError(404)
       else:
-        self.page(user, faculty.get_rooms())
+        self.page(user, faculty)

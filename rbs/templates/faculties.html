@@ -1,0 +1,11 @@
+{% autoescape None %}
+{% include header.html %}
+<article>
+<table id="faculties">
+<tr><th>Faculty</th><th>Total Rooms</th></tr>
+{% for f in faculties %}
+<tr><td><a href="/faculties/{{ f.fid }}">{{ f.name }}</a></td><td>{{ f.total_rooms }}</td></tr>
+{% end for %}
+</table>
+</article>
+{% include footer.html %}
