@@ -16,6 +16,7 @@ CREATE TABLE rooms (
 	rid INTEGER PRIMARY KEY,
 	code TEXT NOT NULL,
 	capacity INTEGER NOT NULL,
+	UNIQUE (fid, rid, code),
 --	PRIMARY KEY (fid, rid),
 	FOREIGN KEY (fid) REFERENCES faculties(fid)
 );
@@ -41,7 +42,8 @@ CREATE TABLE users (
 	username TEXT NOT NULL,
 	utype INTEGER NOT NULL,
 	password TEXT NOT NULL,
-	salt TEXT NOT NULL
+	salt TEXT NOT NULL,
+	UNIQUE (username)
 );
 
 CREATE TABLE bookings (
