@@ -1,10 +1,15 @@
 {% autoescape None %}
 {% include header.html %}
 <article>
+{% if user.utype == 0 %}
+<p>
+<a href="/faculties/add">Add a faculty</a>
+</p>
+{% end if %}
 <table id="faculties">
 <tr><th>Faculty</th><th>Total Rooms</th></tr>
 {% for f in faculties %}
-<tr><td><a href="/faculties/{{ f.fid }}">{{ f.name }}</a></td><td>{{ f.total_rooms }}</td></tr>
+<tr><td><a href="/bookings?fid={{ f.fid }}">{{ f.name }}</a></td><td><a href="/faculties/{{ f.fid }}">{{ f.total_rooms }}</a></td></tr>
 {% end for %}
 </table>
 </article>
