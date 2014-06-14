@@ -2,7 +2,7 @@ from . import connection
 from . import timestamp
 
 class Room:
-  def __init__(self, fid=1, code='', capacity=20, resources={}, rid=None):
+  def __init__(self, fid, code, capacity, resources={}, rid=None):
     self.fid = fid
     self.code = code
     self.capacity = capacity
