@@ -1,6 +1,11 @@
 {% autoescape None %}
 {% include header.html %}
 <article>
+{% if user.utype == 0 %}
+<p>
+<a href="/faculties/{{ faculty.fid }}/add">Add a room</a>
+</p>
+{% end if %}
 <table id="rooms">
 <tr><th>Room Code</th><th>Capacity</th></tr>
 {% for r in faculty.get_rooms() %}

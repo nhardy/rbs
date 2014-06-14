@@ -11,6 +11,7 @@ from rbs.handlers.bookings import BookingsHandler
 from rbs.handlers.faculties import FacultiesHandler
 from rbs.handlers.faculty import FacultyHandler
 from rbs.handlers.add_faculty import AddFacultyHandler
+from rbs.handlers.add_room import AddRoomHandler
 from rbs.handlers.logout import LogoutHandler
 from rbs.handlers.includes import template_loader, current_user
 import random, string
@@ -27,6 +28,7 @@ handlers = [
   (r'/faculties', FacultiesHandler),
   (r'/faculties/([0-9]+)', FacultyHandler),
   (r'/faculties/add', AddFacultyHandler),
+  (r'/faculties/([0-9]+)/add', AddRoomHandler),
   (r'/logout', LogoutHandler),
   (r'/styles/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/styles/'}),
   (r'/images/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/images/'}),
