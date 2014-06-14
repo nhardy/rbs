@@ -14,6 +14,9 @@ from rbs.handlers.add_faculty import AddFacultyHandler
 from rbs.handlers.includes import template_loader, current_user
 import random, string
 
+import os
+import tornado.autoreload
+
 handlers = [
   (r'/', HomeHandler),
   (r'/login', LoginHandler),
@@ -33,5 +36,11 @@ application = tornado.web.Application(handlers, cookie_secret=''.join([random.ch
 if __name__ == '__main__':
   print('Server starting...')
   application.listen(8080)
+
+  for (dir_path, _, files) in os.walk('./rbs/templates/'):
+    for f in files:
+      tornado.autoreload.watch(os.path.join(dir_path, f))
+    break
+  
   tornado.ioloop.IOLoop.instance().start()
   exit()
