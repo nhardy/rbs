@@ -26,7 +26,7 @@ handlers = [
   (r'/fonts/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/fonts/'})
 ]
 
-application = tornado.web.Application(handlers, cookie_secret=''.join([random.choice(string.printable) for _ in range(63)]))
+application = tornado.web.Application(handlers, cookie_secret=''.join([random.choice(string.printable) for _ in range(63)]), debug=True)
 
 if __name__ == '__main__':
   print('Server starting...')
