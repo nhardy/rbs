@@ -7,6 +7,9 @@
 <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
 <link rel="stylesheet" type="text/css" href="/styles/main.css" />
 <link rel="stylesheet" type="text/css" href="/styles/font.css">
+{% if 'querystring.js' in page.flags %}
+<script type="text/javascript" src="/js/querystring.js"></script>
+{% end if %}
 </head>
 <body>
 <div id="wrapper">

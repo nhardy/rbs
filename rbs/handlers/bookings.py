@@ -9,7 +9,7 @@ from datetime import datetime, date
 
 class BookingsHandler(tornado.web.RequestHandler):
   def page(self, user, bookings=[]):
-    self.write(template_loader.load('bookings.html').generate(user=user, bookings=bookings, page=Page('Bookings'), format_datetime=format_datetime))
+    self.write(template_loader.load('bookings.html').generate(user=user, bookings=bookings, p=1, page=Page('Bookings',None,set(('querystring.js',))), format_datetime=format_datetime))
   def get(self):
     user = current_user(self)
     if not user:
@@ -39,7 +39,7 @@ class BookingsHandler(tornado.web.RequestHandler):
         except ValueError:
           error = True
       for_user = user
-      if user.utype == 0:
+      if user.utype == 0 or faculty is not None:
         try:
           uid = self.get_argument('uid','')
           if uid == '':

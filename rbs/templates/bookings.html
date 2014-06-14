@@ -2,10 +2,17 @@
 {% include header.html %}
 <article>
 <table id="bookings">
+<thead>
 <tr><th>Faculty</th><th>Room</th><th>User</th><th>Start</th><th>Finish</th></tr>
+</thead>
+<tbody>
 {% for b in bookings %}
-<tr><td>{{ b.room.faculty.name }}</td><td>{{ b.room.code }}</td><td>{{ b.user.username }}</td><td>{{ format_datetime(b.stime) }}</td><td>{{ format_datetime(b.etime) }}</td></tr>
+<tr><td><a href="/bookings?fid={{ b.room.faculty.fid }}">{{ b.room.faculty.name }}</a></td><td><a href="/bookings?fid={{ b.room.faculty.fid }}&rid={{ b.room.rid }}">{{ b.room.code }}</a></td><td>{% if user.utype == 0 %}<a href="/bookings?uid={{ b.user.uid }}">{% end if %}{{ b.user.username }}{% if user.utype == 0 %}</a>{% end if %}</td><td>{{ format_datetime(b.stime) }}</td><td>{{ format_datetime(b.etime) }}</td></tr>
 {% end for %}
+</tbody>
+<tfoot>
+<tr><td colspan="5"><input type="button" value="Previous" onclick="window.location.href=UpdateQueryString('page','{{ p-1 }}');';" /><input type="button" value="Next" onclick="window.location.href=UpdateQueryString('page','{{ p+1 }}');" /></td></tr>
+</tfoot>
 </table>
 </article>
 {% include footer.html %}

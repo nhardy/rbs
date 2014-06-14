@@ -30,9 +30,10 @@ handlers = [
   (r'/faculties/add', AddFacultyHandler),
   (r'/faculties/([0-9]+)/add', AddRoomHandler),
   (r'/logout', LogoutHandler),
-  (r'/styles/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/styles/'}),
-  (r'/images/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/images/'}),
-  (r'/fonts/(.*)',tornado.web.StaticFileHandler, {'path': './rbs/static/fonts/'})
+  (r'/styles/(.*)', tornado.web.StaticFileHandler, {'path': './rbs/static/styles/'}),
+  (r'/images/(.*)', tornado.web.StaticFileHandler, {'path': './rbs/static/images/'}),
+  (r'/fonts/(.*)', tornado.web.StaticFileHandler, {'path': './rbs/static/fonts/'}),
+  (r'/js/(.*)', tornado.web.StaticFileHandler, {'path': './rbs/static/js/'})
 ]
 
 application = tornado.web.Application(handlers, cookie_secret=''.join([random.choice(string.printable) for _ in range(63)]), debug=True)
