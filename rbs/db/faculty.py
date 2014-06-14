@@ -2,7 +2,7 @@ from . import connection
 from .room import Room
 
 class Faculty:
-  def __init__(self, name='', fid=None):
+  def __init__(self, name, fid=None):
     self.name = name
     self.fid = fid
     
