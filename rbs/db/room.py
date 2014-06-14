@@ -2,8 +2,8 @@ from . import connection
 from . import timestamp
 
 class Room:
-  def __init__(self, fid, code, capacity, resources={}, rid=None):
-    self.fid = fid
+  def __init__(self, faculty, code, capacity, resources={}, rid=None):
+    self.faculty = faculty
     self.code = code
     self.capacity = capacity
     self.resources = resources
@@ -15,13 +15,13 @@ class Room:
       self._cursor.execute('''
         INSERT INTO rooms (fid, code, capacity)
         VALUES (?, ?, ?)
-      ''', (self.fid, self.code, self.capacity))
+      ''', (self.faculty.fid, self.code, self.capacity))
       self.rid = self._cursor.lastrowid
       for resource_type, quantity in self.resources:
         self._cursor.execute('''
           INSERT INTO resources (fid, rid, type, quantity)
           VALUES (?, ?, ?, ?)
-        ''', (self.fid, self.rid, resource_type, quantity))
+        ''', (self.faculty.fid, self.rid, resource_type, quantity))
       connection.commit()
 
   def is_booked(self, stime, etime):
@@ -35,17 +35,18 @@ class Room:
           OR
           (? > stime AND ? <= etime)
         )
-    ''', (self.fid, self.rid, timestamp(stime), timestamp(stime), timestamp(etime), timestamp(etime)))
+    ''', (self.faculty.fid, self.rid, timestamp(stime), timestamp(stime), timestamp(etime), timestamp(etime)))
 
     if self._cursor.fetchone()[0] > 0:
       return True
 
   @classmethod
-  def from_id(cls, fid, rid):
+  def from_id(cls, faculty, rid):
+    from .faculty import Faculty
     cursor = connection.cursor()
     cursor.execute('''
       SELECT code, capacity FROM rooms WHERE fid = ? AND rid = ?
-    ''', (fid, rid))
+    ''', (faculty.fid, rid))
     row = cursor.fetchone()
 
     if row is None:
@@ -56,9 +57,9 @@ class Room:
 
     cursor.execute('''
       SELECT type, quantity FROM resources WHERE fid = ? AND rid = ?
-    ''', (fid, rid))
+    ''', (faculty.fid, rid))
     resources = {}
     for r in cursor:
       resources[r[0]] = r[1]
 
-    return cls(fid, code, capacity, resources, rid)
+    return cls(Faculty.from_id(faculty.fid), code, capacity, resources, rid)

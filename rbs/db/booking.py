@@ -6,8 +6,7 @@ from datetime import datetime
 from . import timestamp
 
 class Booking:
-  def __init__(self, faculty, room, user, stime, etime, requirements={}, bid=None):
-    self.faculty = faculty
+  def __init__(self, room, user, stime, etime, requirements={}, bid=None):
     self.room = room
     self.user = user
     self.stime = stime
@@ -21,7 +20,7 @@ class Booking:
       self._cursor.execute('''
         INSERT INTO bookings (fid, rid, uid, stime, etime)
         VALUES (?, ?, ?, ?, ?)
-      ''', (self.faculty.fid, self.room.rid, self.user.uid, timestamp(self.stime), timestamp(self.etime)))
+      ''', (self.room.faculty.fid, self.room.rid, self.user.uid, timestamp(self.stime), timestamp(self.etime)))
       self.bid = self._cursor.lastrowid
       connection.commit()
 
@@ -38,14 +37,15 @@ class Booking:
 
     requirements = {} ## TODO
 
-    return cls(Faculty.from_id(row[0]), Room.from_id(row[0], row[1]), User.from_id(row[2]), datetime.fromtimestamp(row[3]), datetime.fromtimestamp(row[4]), requirements, bid)
+    faculty = Faculty.from_id(row[0])
+    return cls(faculty, Room.from_id(faculty, row[1]), User.from_id(row[2]), datetime.fromtimestamp(row[3]), datetime.fromtimestamp(row[4]), requirements, bid)
 
   @classmethod
   def attempt_booking(cls, faculty, user, stime, etime, requirements={}):
     for r in faculty.get_rooms():
       if r.is_booked(stime, etime): ## OR not has_requirements()
         continue
-      return cls(faculty, r, user, stime, etime, requirements)
+      return cls(r, user, stime, etime, requirements)
     return False
 
   @classmethod

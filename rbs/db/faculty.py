@@ -20,7 +20,7 @@ class Faculty:
     self._cursor.execute('''
       SELECT rid FROM rooms WHERE fid = ?
     ''', (self.fid,))
-    return [Room.from_id(self.fid, r[0]) for r in self._cursor]
+    return [Room.from_id(self, r[0]) for r in self._cursor]
 
   @property
   def total_rooms(self):
