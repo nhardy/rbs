@@ -25,8 +25,13 @@
 <li><a href="/login">Login</a></li>
 <li><a href="/register">Register</a></li>
 {% else %}
+<li><a href="/faculties">Faculties</a></li>
+{% if user.utype == 0 %}
+<li><a href="/faculties/add">Add a Faculty</a></li>
+{% end if %}
 <li><a href="/book">Make a booking</a></li>
 <li><a href="/bookings">Bookings</a></li>
+<li><a href="/logout">Logout</a></li>
 {% end if %}
 </ul>
 </nav>
