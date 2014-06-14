@@ -5,7 +5,7 @@ from ..db.faculty import Faculty
 
 class FacultyHandler(tornado.web.RequestHandler):
   def page(self, user, faculty):
-    self.write(template_loader.load('faculty.html').generate(user=user, rooms=faculty.get_rooms(), page=Page('Rooms for {} Faculty'.format(faculty.name))))
+    self.write(template_loader.load('faculty.html').generate(user=user, faculty=faculty, page=Page('Rooms for {} Faculty'.format(faculty.name))))
   def get(self, fid):
     user = current_user(self)
     if not user:
