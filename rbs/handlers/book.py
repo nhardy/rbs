@@ -59,12 +59,14 @@ class BookingHandler(tornado.web.RequestHandler):
         errors.append('Capacity must be between 1 and 60.')
       if start > end:
         errors.append('Booking may not end before it begins.')
+      if start < datetime.now():
+        errors.append('Cannot make bookings in the past.')
 
       if errors:
         self.page(user, errors)
       else:
         booking = Booking.attempt_booking(faculty, user, start, end, requirements)
         if not booking:
-          self.page(user, ['Unable to make a booking. No rooms available at the given time for requested faculty.'])
+          self.page(user, ['Unable to make a booking. No rooms available at the given time for the requested faculty.'])
         else:
           self.success(user, booking)
