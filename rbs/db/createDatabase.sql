@@ -16,7 +16,7 @@ CREATE TABLE rooms (
 	rid INTEGER PRIMARY KEY,
 	code TEXT NOT NULL,
 	capacity INTEGER NOT NULL,
-	UNIQUE (fid, rid, code),
+	UNIQUE (code),
 --	PRIMARY KEY (fid, rid),
 	FOREIGN KEY (fid) REFERENCES faculties(fid)
 );
