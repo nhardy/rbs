@@ -20,3 +20,9 @@ def _day(n):
 
 def format_datetime(datetime):
   return '{}, {} of {}'.format(datetime.strftime('%A'), _day(datetime.strftime('%d')), datetime.strftime('%B, %Y - %I:%M%p'))
+
+def querystring(**kwargs):
+  if any(kwargs.values()):
+    return '?' + '&'.join([k + '=' + v for k, v in kwargs.items() if v is not None])
+  else:
+    return ''
