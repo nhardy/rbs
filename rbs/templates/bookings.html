@@ -4,7 +4,7 @@
 <table id="bookings">
 <tr><th>Faculty</th><th>Room</th><th>User</th><th>Start</th><th>Finish</th></tr>
 {% for b in bookings %}
-<tr><td>{{ b.faculty.name }}</td><td>{{ b.room.code }}</td><td>{{ b.user.username }}</td><td>{{ format_datetime(b.stime) }}</td><td>{{ format_datetime(b.etime) }}</td></tr>
+<tr><td>{{ b.room.faculty.name }}</td><td>{{ b.room.code }}</td><td>{{ b.user.username }}</td><td>{{ format_datetime(b.stime) }}</td><td>{{ format_datetime(b.etime) }}</td></tr>
 {% end for %}
 </table>
 </article>

@@ -1,5 +1,5 @@
 import tornado.web
-from .includes import template_loader, current_user, format_datetime
+from .includes import template_loader, current_user, format_datetime, querystring
 from ..objects.page import Page
 from ..db.faculty import Faculty
 from ..db.room import Room
@@ -15,23 +15,44 @@ class BookingsHandler(tornado.web.RequestHandler):
     if not user:
       self.redirect('/')
     else:
+      error = False
+      faculty = None
       try:
-        faculty = Faculty.from_id(int(self.get_argument('fid','')))
+        fid = self.get_argument('fid','')
+        if fid != '':
+          faculty = Faculty.from_id(int(fid))
+          if faculty is None:
+            error = True
       except ValueError:
-        faculty = None
+        error = True
       room = None
-      if faculty is not None:
+      rid = self.get_argument('rid','')
+      if faculty is None:
+        if rid != '':
+          error = True
+      else:
         try:
-          room = Room.from_id(faculty.fid, int(self.get_argument('rid','')))
-        except (ValueError, AttributeError):
-          pass
+          if rid != '':
+            room = Room.from_id(faculty, int(rid))
+            if room is None:
+              error = True
+        except ValueError:
+          error = True
       for_user = user
       if user.utype == 0:
         try:
-          for_user = User.from_id(int(self.get_argument('uid','')))
+          uid = self.get_argument('uid','')
+          if uid == '':
+            for_user = None
+          else:
+            for_user = User.from_id(int(uid))
+            if for_user is None:
+              error = True
         except ValueError:
-          pass
-
-      bookings = Booking.get_bookings(faculty, room, for_user, date.today())
-
-      self.page(user, bookings)
+          for_user = None
+          error = True
+      if error:
+        self.redirect('/bookings{}'.format(querystring(fid=(None if faculty is None else str(faculty.fid)), rid=(None if room is None else str(room.rid)), uid=(None if for_user is None or (for_user == user and user.utype != 0) else str(for_user.uid)))))
+      else:
+        bookings = Booking.get_bookings(faculty, room, for_user, date.today())
+        self.page(user, bookings)

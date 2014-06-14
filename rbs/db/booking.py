@@ -37,8 +37,7 @@ class Booking:
 
     requirements = {} ## TODO
 
-    faculty = Faculty.from_id(row[0])
-    return cls(faculty, Room.from_id(faculty, row[1]), User.from_id(row[2]), datetime.fromtimestamp(row[3]), datetime.fromtimestamp(row[4]), requirements, bid)
+    return cls(Room.from_id(Faculty.from_id(row[0]), row[1]), User.from_id(row[2]), datetime.fromtimestamp(row[3]), datetime.fromtimestamp(row[4]), requirements, bid)
 
   @classmethod
   def attempt_booking(cls, faculty, user, stime, etime, requirements={}):
