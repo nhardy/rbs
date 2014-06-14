@@ -3,6 +3,7 @@ from .includes import template_loader, current_user
 from ..objects.page import Page
 from ..db.faculty import Faculty
 import re
+import sqlite3
 
 class AddFacultyHandler(tornado.web.RequestHandler):
   def page(self, user, errors=[]):
