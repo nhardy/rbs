@@ -37,6 +37,10 @@ h1{
 	font-size: 24pt;
 }
 
+h2 a{
+	color: inherit;
+}
+
 #welcome{
 	float: right;
 	margin-top: -15px;
@@ -88,7 +92,7 @@ footer{
 	border-top: 5px solid #333333;
 	position: relative;
 	margin-top: -100px;
-	height: 100px;
+	height: 95px;
 	clear: both;
 }
 
