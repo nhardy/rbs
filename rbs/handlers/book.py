@@ -65,7 +65,7 @@ class BookingHandler(tornado.web.RequestHandler):
       if errors:
         self.page(user, errors)
       else:
-        booking = Booking.attempt_booking(faculty, user, start, end, requirements)
+        booking = Booking.attempt_booking(faculty, user, start, end, capacity, requirements)
         if not booking:
           self.page(user, ['Unable to make a booking. No rooms available at the given time for the requested faculty.'])
         else:

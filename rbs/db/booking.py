@@ -43,9 +43,9 @@ class Booking:
 
   ## Classmethod for returning a Booking object if one can be created with given requirements
   @classmethod
-  def attempt_booking(cls, faculty, user, stime, etime, requirements={}):
+  def attempt_booking(cls, faculty, user, stime, etime, capacity, requirements={}):
     for r in faculty.get_rooms():
-      if r.is_booked(stime, etime) or not r.has_requirements(60, requirements): ## 60 is a temp value and should be required capacity
+      if r.is_booked(stime, etime) or not r.has_requirements(capacity, requirements):
         continue
       return cls(r, user, stime, etime, requirements)
     return False
