@@ -1,6 +1,7 @@
 {% autoescape None %}
 {% include header.html %}
 <article>
+<div>
 <table id="bookings">
 <thead>
 <tr><th>Faculty</th><th>Room</th><th>User</th><th>Start</th><th>Finish</th></tr>
@@ -14,5 +15,6 @@
 <tr><td colspan="5"><input type="button" value="Previous" onclick="window.location.href=UpdateQueryString('page','{{ p-1 }}');" {% if p == 1 %}disabled="disabled" {% end if %}/><input type="button" value="Next" onclick="window.location.href=UpdateQueryString('page','{{ p+1 }}');" /></td></tr>
 </tfoot>
 </table>
+</div>
 </article>
 {% include footer.html %}
