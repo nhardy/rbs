@@ -92,7 +92,7 @@ footer{
 	clear: both;
 }
 
-form{
+article form, article p{
 	width: 900px;
 	margin: auto;
 	padding: 15px;
