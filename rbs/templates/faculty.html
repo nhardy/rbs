@@ -6,11 +6,13 @@
 <a href="/faculties/{{ faculty.fid }}/add">Add a room</a>
 </p>
 {% end if %}
+<div>
 <table id="rooms">
 <tr><th>Room Code</th><th>Capacity</th></tr>
 {% for r in faculty.get_rooms() %}
 <tr><td>{{ r.code }}</td><td>{{ r.capacity }}</td></tr>
 {% end for %}
 </table>
+</div>
 </article>
 {% include footer.html %}
