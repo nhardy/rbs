@@ -9,8 +9,7 @@ class LoginHandler(tornado.web.RequestHandler):
   def get(self):
     if current_user(self):
       self.redirect('/')
-    else:
-      self.page(False)
+    self.page(False)
   def post(self):
     entered_username = self.get_argument('username')
     entered_password = self.get_argument('password')
