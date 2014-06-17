@@ -40,6 +40,9 @@ class Room:
     if self._cursor.fetchone()[0] > 0:
       return True
 
+  def has_requirements(self, capacity, requirements):
+    return False if capacity > self.capacity else False if any([self.resources[req] < num for req, num in requirements.items()]) else True
+
   @classmethod
   def from_id(cls, faculty, rid):
     from .faculty import Faculty
