@@ -11,7 +11,7 @@
 {% end for %}
 </tbody>
 <tfoot>
-<tr><td colspan="5"><input type="button" value="Previous" onclick="window.location.href=UpdateQueryString('page','{{ p-1 }}');" /><input type="button" value="Next" onclick="window.location.href=UpdateQueryString('page','{{ p+1 }}');" /></td></tr>
+<tr><td colspan="5"><input type="button" value="Previous" onclick="window.location.href=UpdateQueryString('page','{{ p-1 }}');" {% if p == 1 %}disabled="disabled" {% end if %}/><input type="button" value="Next" onclick="window.location.href=UpdateQueryString('page','{{ p+1 }}');" /></td></tr>
 </tfoot>
 </table>
 </article>
