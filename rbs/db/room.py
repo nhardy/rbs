@@ -36,9 +36,7 @@ class Room:
           (? > stime AND ? <= etime)
         )
     ''', (self.faculty.fid, self.rid, timestamp(stime), timestamp(stime), timestamp(etime), timestamp(etime)))
-
-    if self._cursor.fetchone()[0] > 0:
-      return True
+    return True if self._cursor.fetchone()[0] > 0 else False
 
   def has_requirements(self, capacity, requirements):
     return False if capacity > self.capacity else False if any([self.resources[req] < num for req, num in requirements.items()]) else True
