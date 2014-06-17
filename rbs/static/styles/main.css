@@ -52,11 +52,18 @@ nav a:link, nav a:visited{
 	padding: 0px 15px 5px;
 }
 
-nav ul{
+nav div{
 	width: 900px;
-	float: right;
 	margin: auto;
+}
+
+nav ul{
+	float: right;
 	padding: 0;
+}
+
+nav ul li{
+	display: inline;
 }
 
 nav a{
