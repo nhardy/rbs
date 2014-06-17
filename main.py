@@ -40,7 +40,7 @@ application = tornado.web.Application(handlers, cookie_secret=''.join([random.ch
 
 if __name__ == '__main__':
   print('Server starting...')
-  application.listen(8080)
+  application.listen(8000)
 
   for d in ('./rbs/templates/','./rbs/static/fonts/','./rbs/static/images/','./rbs/static/js/','./rbs/static/styles/'):
     for (dir_path, _, files) in os.walk(d):
