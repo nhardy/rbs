@@ -17,7 +17,7 @@ class RegisterHandler(tornado.web.RequestHandler):
     confirm_password = self.get_argument('confirm_password')
 
     errors = []
-    if not re.search(r'^[a-z0-9][a-z0-9_.-]{3,28}[a-z0-9]$', desired_username) or '__' in desired_username or '..' in desired_username or '--' in desired_username:
+    if not re.search(r'^[a-z0-9][a-z0-9_.-]{3,28}[a-z0-9]$', desired_username) or re.search(r'[_.-]{2}', desired_username):
       errors.append('Your desired username is invalid.')
     elif User.from_username(desired_username) is not None:
       errors.append('Your desired username is already in use.')
