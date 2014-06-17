@@ -1,4 +1,5 @@
 from rbs.db.user import User
+import sqlite3
 import re
 
 print('This program will create a new user with admin privelledges.')
