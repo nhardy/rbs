@@ -17,7 +17,7 @@ CREATE TABLE rooms (
 	code TEXT NOT NULL,
 	capacity INTEGER NOT NULL,
 	UNIQUE (code),
---	PRIMARY KEY (fid, rid),
+--	PRIMARY KEY (fid, rid), -- Restriction of SQLite, cannot have composite autoincrementing primary key
 	FOREIGN KEY (fid) REFERENCES faculties(fid)
 );
 

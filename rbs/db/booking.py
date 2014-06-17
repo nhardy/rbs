@@ -6,6 +6,7 @@ from datetime import datetime
 from . import timestamp
 
 class Booking:
+  ## Class constructor for Booking object
   def __init__(self, room, user, stime, etime, requirements={}, bid=None):
     self.room = room
     self.user = user
@@ -24,6 +25,7 @@ class Booking:
       self.bid = self._cursor.lastrowid
       connection.commit()
 
+  ## Classmethod for returning a Booking, given its bid, if it exists
   @classmethod
   def from_id(cls, bid):
     cursor = connection.cursor()
@@ -39,10 +41,11 @@ class Booking:
 
     return cls(Room.from_id(Faculty.from_id(row[0]), row[1]), User.from_id(row[2]), datetime.fromtimestamp(row[3]), datetime.fromtimestamp(row[4]), requirements, bid)
 
+  ## Classmethod for returning a Booking object if one can be created with given requirements
   @classmethod
   def attempt_booking(cls, faculty, user, stime, etime, requirements={}):
     for r in faculty.get_rooms():
-      if r.is_booked(stime, etime): ## OR not has_requirements()
+      if r.is_booked(stime, etime) or not r.has_requirements(60, requirements): ## 60 is a temp value and should be required capacity
         continue
       return cls(r, user, stime, etime, requirements)
     return False

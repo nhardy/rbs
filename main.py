@@ -19,6 +19,7 @@ import random, string
 import os
 import tornado.autoreload
 
+## Register all URL handlers
 handlers = [
   (r'/', HomeHandler),
   (r'/login', LoginHandler),
@@ -42,11 +43,13 @@ if __name__ == '__main__':
   print('Server starting...')
   application.listen(8000)
 
+  ## Add files to watch list for autoreload
   for d in ('./rbs/templates/','./rbs/static/fonts/','./rbs/static/images/','./rbs/static/js/','./rbs/static/styles/'):
     for (dir_path, _, files) in os.walk(d):
       for f in files:
         tornado.autoreload.watch(os.path.join(dir_path, f))
       break
-  
+
+  ## Start Server  
   tornado.ioloop.IOLoop.instance().start()
   exit()

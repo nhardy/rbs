@@ -5,17 +5,22 @@ def password_hash(password, salt):
   return hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
 
 class User:
+  ## Classmethod for creating new users
   @classmethod
   def create(cls, username, utype, password):
     cursor = connection.cursor()
+
+    ## Check if user already exists
     row = cursor.execute('''
       SELECT username FROM users WHERE username = ?
     ''', (username,)).fetchone()
     if row:
       return False
 
+    ## Salt and Hash Password
     salt = ''.join([random.choice(string.printable) for _ in range(32)])
     password = password_hash(password, salt)
+
     cursor.execute('''
       INSERT INTO users (username, utype, password, salt)
       VALUES (?, ?, ?, ?)
@@ -23,6 +28,7 @@ class User:
     connection.commit()
     return cls(username, utype, cursor.lastrowid)
 
+  ## Class constructor for User object
   def __init__(self, username, utype, uid):
     self.username = username
     self.utype = utype
@@ -30,6 +36,7 @@ class User:
 
     self._cursor = connection.cursor()
 
+  ## Classmethod for returning a User object if details are correct
   @classmethod
   def login(cls, username, password):
     cursor = connection.cursor()
@@ -44,6 +51,7 @@ class User:
     else:
       return False
 
+  ## Classmethod for returning User object with a given username if exists
   @classmethod
   def from_username(cls, username):
     cursor = connection.cursor()
@@ -57,6 +65,7 @@ class User:
 
     return cls(row[0], row[1], row[2])
 
+  ## Classmethod for returning a User object with a given uid if exists
   @classmethod
   def from_id(cls, uid):
     cursor = connection.cursor()

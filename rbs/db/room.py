@@ -2,6 +2,7 @@ from . import connection
 from . import timestamp
 
 class Room:
+  ## Class constructor for Room object
   def __init__(self, faculty, code, capacity, resources={}, rid=None):
     self.faculty = faculty
     self.code = code
@@ -24,6 +25,7 @@ class Room:
         ''', (self.faculty.fid, self.rid, resource_type, quantity))
       connection.commit()
 
+  ## Return True or False if Room is booked within a given period
   def is_booked(self, stime, etime):
     self._cursor.execute('''
       SELECT COUNT(*) FROM bookings
@@ -38,9 +40,11 @@ class Room:
     ''', (self.faculty.fid, self.rid, timestamp(stime), timestamp(stime), timestamp(etime), timestamp(etime)))
     return True if self._cursor.fetchone()[0] > 0 else False
 
+  ## Return False if any requirement is not met by the room, otherwise True
   def has_requirements(self, capacity, requirements):
     return False if capacity > self.capacity else False if any([self.resources[req] < num for req, num in requirements.items()]) else True
 
+  ## Classmethod for returning a Room, given its Faculty and rid, if it exists
   @classmethod
   def from_id(cls, faculty, rid):
     from .faculty import Faculty
